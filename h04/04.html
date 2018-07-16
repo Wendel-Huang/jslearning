@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>循环控制</title>
+	<style type="text/css">
+		button{
+			display: block;
+			margin: 10px auto;
+		}
+		.container{
+			width: 330px;
+			height: 100px;
+			margin: 10px auto;
+		}
+		.redblc{
+			float: left;/*块元素转行内元素并左浮动*/
+			width: 100px;
+			height: 100px;
+			background: black;
+			margin: 0 5px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBtn= document.getElementsByTagName('button')[0];
+			var oDiv= document.getElementsByClassName('redblc');
+			oBtn.onclick=function(){
+				for (var i = 0; i < oDiv.length; i++) {
+					oDiv[i].style.background="red"
+				}
+			}
+		}
+	</script>
+
+</head>
+<body>
+	<button>变色</button>
+	<div class="container">
+		<div class="redblc"></div>
+		<div class="redblc"></div>
+		<div class="redblc"></div>
+	</div>
+	
+</body>
+</html>

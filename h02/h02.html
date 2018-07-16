@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>换肤</title>
+	<style type="text/css">
+		body{
+			font: 12px Tahoma;
+		}
+		li{
+			list-style-type: none;
+		}
+		.outer{
+			width: 500px;
+			margin: 0 auto;
+			overflow: hidden;
+			zoom:1;
+		}
+		#skin,#nav{
+			overflow: hidden;
+			zoom:1;
+			padding: 0;
+		}
+		#skin{
+			margin: 10px 0;
+		}
+		#nav{
+			border: 1px solid white;
+		}
+		#skin li{
+			float: left;
+			width: 6px;
+			height: 6px;
+			margin-right: 10px;
+			border-width: 4px;
+			border-style: solid;
+			cursor: pointer;
+			text-indent: -9990px;
+			overflow: hidden;
+		}
+		#red{
+			border-color: red;
+			background: red;
+		}
+		#green{
+			border-color: green;
+			background: green;
+		}
+		#black{
+			border-color: black;
+			background: black;
+		}
+		.current{
+			background: white!important;
+		}
+
+		#nav li{
+			float: left;
+			width: 82px;
+			line-height: 25px;
+			text-align: center;
+			border-right:  1px solid white;
+		}
+
+		a:link ,a:visited{
+			text-decoration: none;
+		}
+		a:hover{
+			text-decoration:underline;
+		}
+		a{
+			color: white;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="red.css">
+
+	<script type="text/javascript">
+		window.onload= function(){
+			var oLink=document.getElementsByTagName('link')[0];
+			var oList=document.getElementById('skin').getElementsByTagName('li');
+			for (var i = 0; i < oList.length; i++) {
+				oList[i].onclick=function(){
+					for(var p in oList){
+						oList[p].className="";
+					}
+					this.className="current";
+					oLink['href']=this.id+'.css'
+				}
+			}
+		}
+	</script>
+
+</head>
+
+<body>
+	<div class="outer">
+		<ul id="skin">
+			<li id="red" class="current" title="红色">red</li> <!-- title鼠标放置显示 -->
+			<li id="green" title="绿色">green</li>
+			<li id="black" title="黑色">black</li>
+		</ul>
+		<ul id="nav">
+			<li>
+				<a href="javascript:;">新闻</a>
+			</li>
+			<li>
+				<a href="javascript:;">娱乐</a>
+			</li>
+			<li>
+				<a href="javascript:;">体育</a>
+			</li>
+			<li>
+				<a href="javascript:;">电影</a>
+			</li>
+			<li>
+				<a href="javascript:;">音乐</a>
+			</li>
+			<li>
+				<a href="javascript:;">旅游</a>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

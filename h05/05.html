@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>鼠标悬停</title>
+	<style type="text/css">
+		body{
+			font-size: 12px;
+		}
+		#mydiv{
+			width: 150px;
+			height: 150px;
+			margin: 10px auto;
+			border: 10px solid black;
+			padding: 10px;
+			background: black;
+			color: white;
+		}
+		#mydiv.hover{
+			background: #f0f0f0;
+			border-color: red;
+			color: red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function () {
+			var oDiv=document.getElementById('mydiv');
+			oDiv.onmouseover=function(){
+				oDiv.className='hover'
+			};
+			oDiv.onmouseout=function(){
+				oDiv.className=''
+			};
+		}
+	</script>
+</head>
+<body>
+	<div id="mydiv">鼠标移入改变样式，鼠标移出恢复。</div>
+</body>
+</html>

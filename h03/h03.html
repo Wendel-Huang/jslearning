@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>传参dem0</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
+	<style type="text/css">
+		input{
+			width:160px;
+			margin: 5px auto;
+			display: block;
+		}
+		button{
+			margin: 5px auto;
+			display: block;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var myFun=function(a,b){
+			alert(a.value);
+			alert(b.value)
+		}
+		window.onload=function(){
+			var oinput=document.getElementsByTagName('input');
+			var obutton=document.getElementsByTagName('button')[0];
+			obutton.onclick=function(){
+				myFun(oinput[0],oinput[1])
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" value="曼谷市">
+	<input type="text" value="泰国">
+	<button>传参</button>
+</body>
+</html>
