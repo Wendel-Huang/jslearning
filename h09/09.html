@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>鼠标移动改变对象透明度</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
+	<style type="text/css">
+		ul,li{
+			list-style-type: none;
+		}
+		#imgList{
+			width: 700px;
+			padding: 0 0 10px 10px;
+			border:1px solid #333;
+			overflow: hidden;
+		}
+		#imgList li{
+			float: left;
+			border:1px solid #ccc;
+			margin: 10px 10px 0 0;
+		}
+		#imgList li img{
+			opacity: 0.3;
+			cursor: crosshair;
+		}
+		#imgList .current img{
+			opacity: 1;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oLi=document.getElementsByTagName('li');
+			for (var i = 0; i < oLi.length; i++) {
+				oLi[i].onmouseover=function(){
+					this.className='current'
+				}
+				oLi[i].onmouseout=function(){
+					this.className=''
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="imgList">
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/1.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/2.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/3.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/4.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/5.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/6.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/7.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/8.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/9.jpg">
+		</li>
+		<li>
+			<img src="http://www.fgm.cc/learn/lesson2/img/10.jpg">
+		</li>
+	</ul>
+</body>
+</html>
