@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>简易年历</title>
+	<style type="text/css">
+		body{
+			font: 12px Tahoma;
+		}
+		#outer{
+			width: 248px;
+			margin: 10px auto;
+			background: #eaeaea;
+			padding: 0 0 10px 10px;
+			overflow: hidden;
+		}
+		ul{
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		li{
+			list-style-type: none;
+			float: left;
+			width: 50px;
+			height: 50px;
+			margin: 10px 10px 0 0;
+			background: #444;
+			color: #fff;
+			text-align: center;
+			font-size: 14px;
+			border:1px solid #444;
+		}
+		.current{
+			background: #fff;
+			color: red;
+		}
+		li strong{
+			display: block;
+			font-size: 18px;
+		}
+		#content{
+			border:1px solid #fff;
+			background: #f1f1f1;
+			margin: 10px 10px 0 0;
+		}
+		#content strong{
+			margin: 5px 0;
+			font-size: 15px;
+			display: inline-block;
+		}
+		#content p{
+			margin: 5px 0;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oLi=document.getElementsByTagName('li');
+			var oNum=document.getElementById('num');
+			var oP=document.getElementById('thep');
+			var array=["元旦：1月1日至3日放假三天。", "春节：2月2日至8日放假7天。", "妇女节：3月8日妇女节，与我无关。", "清明节：4月3日至5日放假3天", "劳动节：4月30日至5月2日放假3天。", "端午节：6月4日至6日放假3天。", "小暑：7月7日小暑。不放假。", "七夕节：8月6日七夕节。不放假。", "中秋节：9月10日至12日放假3天。", "国庆节：10月1日至7日放假7天。", "立冬：11月8日立冬。不放假。", "艾滋病日:12月1日<br />废除奴隶制国际日:12月2日。"];
+			for (var i = 0; i < oLi.length; i++) {
+				oLi[i].index=i;
+				oLi[i].onmouseover=function(){
+					for (var i = 0; i < oLi.length; i++) {
+						oLi[i].className=''
+					}
+					oLi[this.index].className='current';
+					oNum.innerHTML=this.index+1;
+					oP.innerHTML=array[this.index];
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<ul>
+			<li>
+				<strong>1</strong>
+				JAN
+			</li>
+			<li>
+				<strong>2</strong>
+				FER
+			</li>
+			<li>
+				<strong>3</strong>
+				MAR
+			</li>
+			<li>
+				<strong>4</strong>
+				APR
+			</li>
+			<li>
+				<strong>5</strong>
+				MAR
+			</li>
+			<li class="current">
+				<strong>6</strong>
+				JUN
+			</li>
+			<li>
+				<strong>7</strong>
+				JUL
+			</li>
+			<li>
+				<strong>8</strong>
+				AUG
+			</li>
+			<li>
+				<strong>9</strong>
+				SEP
+			</li>
+			<li>
+				<strong>10</strong>
+				OCT
+			</li>
+			<li>
+				<strong>11</strong>
+				NOV
+			</li>
+			<li>
+				<strong>12</strong>
+				DEC
+			</li>
+		</ul>
+		<div id="content">
+			<strong id="num">6</strong>
+			<strong>月节日</strong>
+			<p id="thep">端午节：6月4日至6日放假3天。</p>
+		</div>
+	</div>
+</body>
+</html>
