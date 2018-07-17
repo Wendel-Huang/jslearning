@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>输入字符改变任意属性</title>
+	<style type="text/css">
+		body{
+			font: 12px Tahoma;
+		}
+		#outer{
+			width: 300px;
+			margin: 0 auto;
+		}
+		#mydiv{
+			width: 180px;
+			height: 180px;
+			background: black;
+			color: white;
+			margin: 0 auto;
+		}
+		label{
+			width: 60px;
+			text-align: right;
+			display: inline-block;
+		}
+		input{
+			padding: 3px;
+			border:1px solid #ccc;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var changeStyle=function(o,att,val){
+			o.style[att]=val;
+		}	
+		window.onload=function(){
+			var oInput=document.getElementsByTagName('input');
+			var oBtn=document.getElementsByTagName('button');
+			var oDiv=document.getElementById('mydiv');
+			oBtn[0].onclick=function(){
+				changeStyle(oDiv,oInput[0].value,oInput[1].value)
+			}
+			oBtn[1].onclick=function(){
+				oDiv.removeAttribute("style")
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<p>
+			<label>属性名: </label>
+			<input type="text" value="background"/>
+		</p>
+		<p>
+			<label>属性值: </label>
+			<input type="text" value="blue"/>
+		</p>
+		<p>
+			<label></label>
+			<button>确认</button>
+			<button>重置</button>
+		</p>
+	</div>
+
+	<div id="mydiv">
+		在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果
+	</div>
+</body>
+</html>
