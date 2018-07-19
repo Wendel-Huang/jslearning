@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>parseInt获取数字</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<style type="text/css">
+		body{
+			width: 500px;
+			margin: 10px auto;
+		}
+		.n-text{
+			width: 60px;
+			padding: 3px;
+			background: #f0f0f0;
+			border:1px solid #ccc;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oInput=document.getElementsByTagName('input');
+			var oSpan=document.getElementsByTagName('span')[0];
+			// for (var i = 0; i < oInput.length-1; i++) {
+			// 	oInput[i].onkeyup=function(){
+			// 		this.value=this.value.replace(/[^\d]/,"");
+			// 	}
+			// }
+			oInput[2].onclick=function(){
+				(oInput[0].value==''||oInput[1].value=='')?
+				alert('请输入数字'):
+				oSpan.innerHTML=parseInt(oInput[0].value)+parseInt(oInput[1].value)
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" class="n-text">
+	<strong>+</strong>
+	<input type="text" class="n-text">
+	<strong>=</strong>
+	<span>?</span>
+	<input type="button" value="求和">
+</body>
+</html>
