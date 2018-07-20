@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>倒计时</title>
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		#outer{
+			background: #000;
+			margin: 10px auto;
+			width: 300px;
+			text-align: center;
+			color:#fff;
+		}
+		#outer span{
+			background: #fff;
+			color: #000;
+			padding: 0 10px;
+			margin: 0 2px;
+			border:2px solid #ccc;
+			line-height: 60px;
+		}
+		input{
+			/*display: block;*/
+			width: 283px;
+			height: 50px;
+			background: url('http://www.fgm.cc/learn/lesson3/img/btn-1.png') no-repeat;
+			border:0;
+			cursor: pointer;
+		}
+		.cancel{
+			background: url('http://www.fgm.cc/learn/lesson3/img/btn-1.png') no-repeat 0 -50px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oSpan=document.getElementById('outer').getElementsByTagName('span');
+			var oInput=document.getElementsByTagName('input')[0];
+			var timer=null;
+			var remainseconds=oSpan[0].innerHTML.replace(/^0/,'')*60+parseInt(oSpan[1].innerHTML.replace(/^0/,''));
+
+
+			oInput.onclick=function(){
+				this.className==''?(timer=setInterval(updateTime,1000),updateTime()):(clearInterval(timer));
+				this.className=this.className==''?'cancel':'';
+			}
+
+			function format(a) {
+                return a.toString().replace(/^(\d)$/, '0$1')
+            }
+
+            function updateTime(){
+            	if(remainseconds<=0){
+            		clearInterval(timer)
+            		return;
+            	}
+            	remainseconds--;
+            	oSpan[0].innerHTML=format(parseInt(remainseconds/60));
+            	oSpan[1].innerHTML=format(parseInt(remainseconds%60));
+            }
+		}
+	</script>
+</head>
+<body>
+	<div id="outer">
+		<span>99</span> 分钟 <span>40</span> 秒
+		<input type="button" >
+	</div>
+</body>
+</html>
