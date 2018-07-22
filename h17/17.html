@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>跟随鼠标显示大图</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body ul{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style-type: none;
+			overflow: hidden;
+		}
+		li{
+			width: 170px;
+			height: 170px;
+			float: left;
+			padding: 0;
+			border:1px solid #ddd;
+			margin: 0 10px;
+		}
+		li .active{
+			border:1px solid #a10000;
+		}
+		#small{
+			width: 768px;
+			margin: 0 auto;
+		}
+		#big{
+			width: 400px;
+			height: 400px;
+			position: absolute;
+			border:2px solid #ddd;
+			display:none;
+		}
+		#big div{
+			width: 400px;
+			height: 400px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #fff url(http://www.fgm.cc/learn/lesson5/img/loading.gif) 50% 50% no-repeat;
+			opacity: 0.5;
+			filter: alpha(opacity:50);
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oLi=document.getElementsByTagName('li');
+			var oBig=document.getElementById('big');
+			var oLoading=oBig.getElementsByTagName('div')[0];
+
+			for (var i = 0; i < oLi.length; i++) {
+				oLi[i].index=i;
+				oLi[i].onmouseover=function(){
+					var oImg=document.createElement('img');
+					var img= new Image();
+					img.src=oImg.src=this.getElementsByTagName('img')[0].src.replace('.jpg','_big.jpg');
+					oBig.appendChild(oImg);
+					this.className='active';
+					oBig.style.display=oLoading.style.display='block';
+					oImg.onload=function(){oLoading.style.display='none'}
+				}
+
+				oLi[i].onmousemove = function (event){
+					var event = event || window.event;	
+					var iWidth = document.documentElement.offsetWidth - event.clientX;	
+					//设置big的top值
+					oBig.style.top = event.clientY + 20 + "px";
+					//设置big的left值, 如果右侧显示区域不够, 大图将在鼠标左侧显示.
+					oBig.style.left = (iWidth < oBig.offsetWidth + 10 ? event.clientX - oBig.offsetWidth - 10 : event.clientX + 10) + "px";
+				};
+
+				oLi[i].onmouseout=function(){
+					this.className=''
+					oBig.style.display='none'
+					oBig.removeChild(oBig.lastChild)
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="small">
+		<ul>
+			<li>
+				<img src="http://www.fgm.cc/learn/lesson5/img/shirt_1.jpg">
+			</li>
+			<li>
+				<img src="http://www.fgm.cc/learn/lesson5/img/shirt_2.jpg">
+			</li>
+			<li>
+				<img src="http://www.fgm.cc/learn/lesson5/img/shirt_3.jpg">
+			</li>
+			<li>
+				<img src="http://www.fgm.cc/learn/lesson5/img/shirt_4.jpg">
+			</li>
+		</ul>
+	</div>
+	<div id="big">
+		<div></div>
+	</div>
+</body>
+</html>
