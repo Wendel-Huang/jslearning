@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>键盘控制div</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body{
+			margin: 0;
+		}
+		#mydiv{
+			position: absolute;
+			background: red;
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var oDiv=document.getElementById('mydiv')
+			var vTop=vBottom=vLeft=vRight=vCtrl=false;
+
+			setInterval(function(){
+				if(vLeft){
+					oDiv.style.left=oDiv.offsetLeft-10+'px'
+				}
+				else if(vRight){
+					oDiv.style.left=oDiv.offsetLeft+10+'px'
+				}
+
+				if (vTop) {
+					oDiv.style.top=oDiv.offsetTop-10+'px'
+				}
+				else if(vBottom){
+					oDiv.style.top=oDiv.offsetTop+10+'px'
+				}
+			},30)
+
+			window.onkeydown=function(event){
+				var event=event||window.event;
+				vCtrl=event.ctrlkey;
+
+				switch(event.keycode){
+					case 37:
+					vLeft=true;
+					break;
+
+					case 38:
+					if(vCtrl){
+						var oldWidth=oDiv.offsetWidth;
+						var oldHeight=oDiv.offsetHeight;
+
+						oDiv.style.width=oDiv.offsetWidth*1.5+'px'
+						oDiv.style.height=oDiv.offsetHeight*1.5+'px';
+
+						oDiv.style.left=oDiv.offsetLeft-(oDiv.offsetWidth-oldWidth)/2+'px';
+						oDiv.style.top=oDiv.offsetTop-(oDiv.offsetHeight-oldHeight)/2+'px';
+						break;
+					}
+					vTop=true;
+					break;
+
+					case 39:
+					vRight=true;
+					break;
+
+					case 40:
+					if (vCtrl) {
+						var oldWidth=oDiv.offsetWidth;
+						var oldHeight=oDiv.offsetHeight;
+
+						oDiv.style.width=oDiv.offsetWidth*0.67+'px'
+						oDiv.style.height=oDiv.offsetHeight*0.67+'px'
+
+						oDiv.style.left=oDiv.offsetLeft+(oldWidth-oDiv.offsetWidth)/2+'px'
+						oDiv.style.top=oDiv.offsetTop+(oldHeight-oDiv.offsetHeight)/2+'px'
+						break;
+					}
+					vBottom=true;
+					break;
+
+					case 49:
+					vCtrl&&(oDiv.style.background='green')
+					break;
+
+					case 50:
+					vCtrl&&(oDiv.style.background='blue')
+					break;
+
+					case 51:
+					vCtrl&&(oDiv.style.background='yellow')
+					break;
+				}
+				return false;
+			}
+
+			window.onkeyup=function(event){
+				switch((event||window.event).keycode){
+					case 37:
+					vLeft=false;
+					break;
+
+					case 38:
+					vTop=false;
+					break;
+
+					case 39:
+					vRight=false;
+					break;
+
+					case 40:
+					vbottom=false;
+					break;
+				}
+			}
+		}
+	</script>
+
+	<!-- <script type="text/javascript">
+		window.onload = function ()
+{
+	var oBox = document.getElementById("mydiv");
+	var bLeft = bTop = bRight = bBottom = bCtrlKey = false;
+	
+	setInterval(function ()
+	{
+		if (bLeft)
+		{
+			oBox.style.left = oBox.offsetLeft - 10 + "px"
+		}
+		else if (bRight)
+		{
+			oBox.style.left = oBox.offsetLeft + 10 + "px"
+		}
+		
+		if (bTop)
+		{
+			oBox.style.top = oBox.offsetTop - 10 + "px"	
+		}
+		else if(bBottom)
+		{
+			oBox.style.top = oBox.offsetTop + 10 + "px"
+		}
+		//防止溢出
+		limit();
+	},30);	
+	
+	document.onkeydown = function (event)
+	{
+		var event = event || window.event;
+		bCtrlKey = event.ctrlKey;
+		
+		switch (event.keyCode)
+		{
+			case 37:
+				bLeft = true;
+				break;
+			case 38:
+				if(bCtrlKey)
+				{
+					var oldWidth = oBox.offsetWidth;
+					var oldHeight = oBox.offsetHeight;
+					
+					oBox.style.width = oBox.offsetWidth * 1.5 + "px";
+					oBox.style.height = oBox.offsetHeight * 1.5 + "px";				
+					
+					oBox.style.left = oBox.offsetLeft - (oBox.offsetWidth - oldWidth) / 2 + "px";
+					oBox.style.top = oBox.offsetTop - (oBox.offsetHeight - oldHeight) / 2 + "px";
+					
+					break;	
+				}
+				bTop = true;
+				break;
+			case 39:
+				bRight = true;
+				break;
+			case 40:
+				if(bCtrlKey)
+				{
+					var oldWidth = oBox.offsetWidth;
+					var oldHeight = oBox.offsetHeight;
+					
+					oBox.style.width = oBox.offsetWidth * 0.75 + "px";
+					oBox.style.height = oBox.offsetHeight * 0.75 + "px";				
+					
+					oBox.style.left = oBox.offsetLeft - (oBox.offsetWidth - oldWidth) / 2 + "px";
+					oBox.style.top = oBox.offsetTop - (oBox.offsetHeight - oldHeight) / 2 + "px";
+					
+					break;	
+				}
+				bBottom = true;
+				break;
+			case 49:
+				bCtrlKey && (oBox.style.background = "green");
+				break;
+			case 50:
+				bCtrlKey && (oBox.style.background = "yellow");
+				break;
+			case 51:
+				bCtrlKey && (oBox.style.background = "blue");
+				break;
+		}
+		
+		return false
+	};
+
+	document.onkeyup = function (event)
+	{
+		switch ((event || window.event).keyCode)
+		{
+			case 37:
+				bLeft = false;
+				break;
+			case 38:
+				bTop = false;
+				break;
+			case 39:
+				bRight = false;
+				break;
+			case 40:
+				bBottom = false;
+				break;
+		}
+	};
+
+	//防止溢出
+	function limit()
+	{
+		var doc = [document.documentElement.clientWidth, document.documentElement.clientHeight]
+		//防止左侧溢出
+		oBox.offsetLeft <=0 && (oBox.style.left = 0);
+		//防止顶部溢出
+		oBox.offsetTop <=0 && (oBox.style.top = 0);
+		//防止右侧溢出
+		doc[0] - oBox.offsetLeft - oBox.offsetWidth <= 0 && (oBox.style.left = doc[0] - oBox.offsetWidth + "px");
+		//防止底部溢出
+		doc[1] - oBox.offsetTop - oBox.offsetHeight <= 0 && (oBox.style.top = doc[1] - oBox.offsetHeight + "px")
+	}
+};
+
+	</script> -->
+</head>
+<body>
+	<div id="mydiv"></div>
+</body>
+</html>
