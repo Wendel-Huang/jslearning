@@ -34,13 +34,14 @@
 				else if(vBottom){
 					oDiv.style.top=oDiv.offsetTop+10+'px'
 				}
+				limit()
 			},30)
 
 			window.onkeydown=function(event){
 				var event=event||window.event;
-				vCtrl=event.ctrlkey;
+				vCtrl=event.ctrlKey;
 
-				switch(event.keycode){
+				switch(event.keyCode){
 					case 37:
 					vLeft=true;
 					break;
@@ -95,7 +96,7 @@
 			}
 
 			window.onkeyup=function(event){
-				switch((event||window.event).keycode){
+				switch((event||window.event).keyCode){
 					case 37:
 					vLeft=false;
 					break;
@@ -109,9 +110,17 @@
 					break;
 
 					case 40:
-					vbottom=false;
+					vBottom=false;
 					break;
 				}
+			}
+
+			function limit(){
+				var doc=[document.documentElement.clientWidth,document.documentElement.clientHeight]
+				oDiv.offsetLeft<=0&&(oDiv.style.left=0)
+				oDiv.offsetTop<=0&&(oDiv.style.top=0)
+				doc[0]-oDiv.offsetLeft-oDiv.offsetWidth<=0&&(oDiv.style.left=doc[0]-oDiv.offsetWidth+'px')
+				doc[1]-oDiv.offsetTop-oDiv.offsetHeight<=0&&(oDiv.style.top=doc[1]-oDiv.offsetHeight+'px')
 			}
 		}
 	</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>选项卡JQ</title>
+	<style type="text/css">
+		#mydiv div{
+			width: 200px;
+			height: 200px;
+			border:1px red solid;
+			display: none;
+		}
+		.active{
+			background: red;
+		}
+	</style>
+
+	<script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#mydiv').find('input').click(function(){
+				$('#mydiv').find('input').attr('class','');
+				$('#mydiv').find('div').css('display','none');
+				$(this).attr('class','active');
+				$('#mydiv').find('div').eq($(this).index()).css('display','block');
+			})
+		})
+	</script>
+</head>
+<body>
+	<div id="mydiv">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div >1111111</div>
+		<div >2222222</div>
+		<div >3333333</div>
+	</div>
+	
+</body>
+</html>
