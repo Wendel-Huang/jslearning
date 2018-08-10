@@ -30,17 +30,72 @@ body { font-size:12px; font-family:"微软雅黑"; }
 /* end public */
 
 
-#header {width: 960px; height: 30px; margin: 0 auto; background: #fefefe; border-radius: 0 0 6px 6px;}
-#nav {width: 960px; height: 100px; margin: 0 auto;}
-#search {width: 960px; margin: 0 auto; height: 114px; border-radius: 6px;}
-.content {width: 960px; margin: 0 auto;}
+#header, #nav, #search, .content {width: 960px; margin: 0 auto;}
+#search, .section, .side_section, .side_ad {border: 1px solid #dbdbdb; border-radius: 6px;}
 
-.main {width: 710px; margin: 0;}
+
+#header {height: 30px; background: #fafafa; border-radius: 0 0 6px 6px;}
+#nav {height: 100px; position: relative;}
+#search {height: 114px; position: relative;}
+
+
+.main {width: 710px;}
 .themargin {margin: 10px 0;}
-.section {width: 318px; height: 300px; padding: 0 15px; border:1px solid #dbdbdb; border-radius: 6px;}
-.options {width: 318px; height: 300px; padding: 0 15px; border:1px solid #dbdbdb; border-radius: 6px;}
+.section {width: 318px; height: 418px; padding: 0 15px;}
+.options {width: 350px; height: 420px;}
 .main_ad {width: 710px; border-radius: 6px; overflow: hidden;}
 
-.side {width: 242px; height: 1000px;}
-.side_section {width: 240px; height: 300px; border:1px solid #dbdbdb; border-radius: 6px; margin: 10px 0;}
-.side_ad {width: 240px; border:1px solid #dbdbdb; border-radius: 6px;; margin: 10px 0; overflow: hidden;}
+.side {width: 240px; height: 1000px;}
+.side_section {height: 300px; margin: 10px 0; padding: 0 12px;}
+.side_ad {margin: 10px 0; overflow: hidden;}
+
+.options .nav {height: 34px;}
+.options .nav li {width: 172px; height: 33px; border: 1px solid #dbdbdb; border-radius: 6px 6px 0 0; border-bottom: none;}
+.options .nav .active {width: 172px; height: 35px; background: white;}
+.options .con {height: 384px; border:1px solid #dbdbdb; border-radius: 0 0 6px 6px;}
+
+
+#header .city {float: left; padding-left: 20px; line-height: 30px;}
+#header .city a {padding: 0 7px; border: 1px solid #e5e5e5; border-radius: 4px; color: #999; background: #fff; box-shadow: 1px 1px 0 #ededed}
+#header .city .active {color: #d60d03;}
+#header .city a:hover {background: #f1f1f1;}
+#header .link {float: right; padding-right: 20px; line-height: 30px; color: #d5d5d5; word-spacing: 4px;}
+#header .link a {color: #666; background: url(../img/header_link_bg.gif) no-repeat 0 3px; padding-left: 20px;}
+#header .link a:hover {text-decoration: underline;}
+#header .link .ico1 {}
+#header .link .ico2 {background-position: 0 -27px;}
+
+#nav ul {position:absolute; top: 10px;}
+#nav li {float: left;}
+#nav li a {display: block; color: #333; width: 66px; padding-top: 50px; text-align: center; background: url(../img/nav_bg.png) no-repeat;}
+#nav .nav_1 {left: 11px;}
+#nav .nav_2 {right: 11px;}
+
+#nav li .bg1 {background-position: 0 0; }
+#nav li .bg2 {background-position: -66px 0;}
+#nav li .bg3 {background-position: -132px 0;}
+#nav li .bg4 {background-position: -198px 0;}
+#nav li .bg5 {background-position: -264px 0;}
+#nav li .bg6 {background-position: -330px 0;}
+#nav li .bg7 {background-position: -396px 0;}
+#nav li .bg8 {background-position: -462px 0;}
+#nav li .bg9 {background-position: -528px 0;}
+#nav li .bg10 {background-position: -594px 0;}
+
+#nav li .bg1:hover {background-position: 0 -70px;}
+#nav li .bg2:hover {background-position: -66px -70px;}
+#nav li .bg3:hover {background-position: -132px -70px;}
+#nav li .bg4:hover {background-position: -198px -70px;}
+#nav li .bg5:hover {background-position: -264px -70px;}
+#nav li .bg6:hover {background-position: -330px -70px;}
+#nav li .bg7:hover {background-position: -396px -70px;}
+#nav li .bg8:hover {background-position: -462px -70px;}
+#nav li .bg9:hover {background-position: -528px -70px;}
+#nav li .bg10:hover {background-position: -594px -70px;}
+
+
+#search .bar {width: 960px; height: 64px; background-color: #e21c01; position: absolute; top: 16px; left: -1px; border: 1px solid #c40d0e; border-radius: 6px; box-shadow: 2px 3px 2px #d2d2d2;}
+#search .bar .menu {position: absolute; left: 226px; top: -27px;}
+#search .bar .menu li {float: left; width: 78px; height: 25px; background-color: #fcfcfc; border: 1px solid #f8d0bf; border-radius: 5px 5px 0 0; margin-right: 1px; cursor: pointer; border-bottom: none; line-height: 25px; text-align: center;}
+#search .bar .menu .active {height: 27px; background: #e21c01; color: #fbfbfb; font-weight: bold; border-color: #c40d0e; position: absolute; top: -1px}
+
