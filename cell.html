@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>细胞自动机js版</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<canvas id="can" width='1600' height="2400" style="background-color: white;">对不起，您的浏览器不支持canvas
+	</canvas>
+	<p><b>细胞自动机：</b></p>
+	<p>每个格子，周围有三个活细胞时，此格子中的细胞重生；周围的细胞数少于两个时，饿死；多余三个时，挤死。</p>
+	<p></p>
+	<p><i>本js代码使用canvas绘图，使用setTimeout定时循环</i></p>
+	<script type="text/javascript">
+		//field存储细胞死活情况
+		var width = document.getElementById('can').offsetWidth;
+		var height = document.getElementById('can').offsetHeight;
+		var numWidth = width/10;
+		var numHeight = height/10;
+
+		var field = new Array();
+		for(var i=0; i<numWidth; i++){
+			field[i] = new Array();
+			for(var j=0; j<numHeight; j++){
+				if(Math.random()<0.2){
+					field[i][j]=1;
+				}else{
+					field[i][j]=0;
+				}
+			}
+		}
+
+
+
+		box = document.getElementById('can').getContext('2d');
+		box.fillStyle='red';
+		// box.lineWidth='1';
+		// box.strokeStyle="blue";
+		for(var i=0; i<numWidth; i++){
+			for(var j=0; j<numHeight; j++){
+				box.strokeRect(i*10,j*10,10,10);
+				if(field[i][j]==1){
+					box.fillRect(i*10+1,j*10+1,9,9)
+				}
+			}
+		}
+
+		lets_run();
+
+		function lets_run(){
+			box.fillStyle='white';
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					box.fillRect(i*10+1,j*10+1,9,9)
+				}
+			}
+			box.fillStyle='red';
+			box.lineWidth='1';
+			box.strokeStyle="blue";
+			//newfield存储细胞下一次死活情况
+			var newfield = new Array();
+			for(var i=0; i<numWidth; i++){
+				newfield[i] = new Array();
+				for(var j=0; j<numHeight; j++){
+					newfield[i][j]=0;
+				}
+			}
+
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					var nb_alive=0;
+					for(var k=-1; k<2; k++){
+						for(var l=-1; l<2; l++){
+							r=i+k;
+							c=j+l;
+							if ( r >-1 && r<numWidth && c>-1 && c<numHeight && !(r== i && c == j) ) {
+								nb_alive=nb_alive+field[r][c];
+							}
+						}
+					}
+					if(field[i][j]){
+						if(nb_alive<2||nb_alive>3){
+							newfield[i][j]=0;
+						}else{
+							newfield[i][j]=1;
+						}
+					}else{
+						if(nb_alive==3){
+							newfield[i][j]=1;
+						}else{
+							newfield[i][j]=0;
+						}
+					}
+				}
+			}
+
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					field[i][j]=newfield[i][j];
+					if(field[i][j]==1){
+						box.fillRect(i*10+1,j*10+1,9,9)
+					}
+				}
+			}
+
+			setTimeout(lets_run,100);
+		}
+	</script>
+</body>
+</html>
