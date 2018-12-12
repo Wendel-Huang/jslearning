@@ -9,14 +9,28 @@
 			text-align: center;
 			margin: 10px 0;
 		}
+		#info{
+			border: 1px solid #aaa;
+			width: 378px;
+			margin: 1px auto;
+			height: 25px;
+		}
 		button{
 			width:80px;
 			height: 60px;
 		}
+		p{
+			margin: 8px;
+		}
 	</style>
 </head>
 <body>
-	<canvas id="can" width='380' height="400" style="background-color: white;">对不起，您的浏览器不支持canvas
+	<div id="info">
+		<label>长度：</label><strong id="lengthId">6</strong>
+		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+		<label>速度：</label><strong id="vId">1</strong>
+	</div>
+	<canvas id="can" width='380' height="380" style="background-color: white;">对不起，您的浏览器不支持canvas
 	</canvas>
 	<div id="buttons">
 		<p><button id="2">up</button></p>
@@ -37,6 +51,7 @@
 		var direction=37;
 		var newdirection; //获取键盘值，判断不是回头时，赋值给direction
 		var box;
+		var v=1;
 
 		var headx=16;
 		var heady=19;
@@ -128,9 +143,13 @@
 			if(direction==39) right();
 			if(direction==40) down();
 
+			v=Math.floor(snake.length/6);
+			document.getElementById('lengthId').innerHTML=snake.length;
+			document.getElementById('vId').innerHTML=v;
+
 			flushmap();
 			paintmap();
-			setTimeout(lets_run,200);
+			setTimeout(lets_run,500/v);
 		}
 
 
