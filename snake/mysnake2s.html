@@ -17,7 +17,7 @@
 		}
 		button{
 			width:45px;
-			height: 35px;
+			height: 45px;
 		}
 		p{
 			margin: 8px;
@@ -31,7 +31,7 @@
 			display: inline;
 			float: left;
 			width: 180px;
-			height: 120px;
+			height: 180px;
 		}
 	</style>
 </head>
@@ -52,17 +52,19 @@
 			<p><button id="2">up</button></p>
 			<p>
 				<button id="1">left</button>
-				<button id="4">down</button>
+				<label>&nbsp&nbsp&nbsp&nbsp</label>
 				<button id="3">right</button>
 			</p>
+			<p><button id="4">down</button></p>
 		</div>
 		<div class="lr">
 			<p><button id="6">up</button></p>
 			<p>
 				<button id="5">left</button>
-				<button id="8">down</button>
+				<label>&nbsp&nbsp&nbsp&nbsp</label>
 				<button id="7">right</button>
 			</p>
+			<p><button id="8">down</button></p>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -232,6 +234,13 @@
 			setTimeout(lets_run,10);
 		}
 
+		function abssmall(){
+			if(Math.abs(snake.length-snake2.length)>2){
+				alert('不要厚此薄彼哦！');
+				location.reload();
+			}
+			setTimeout(abssmall,50);
+		}
 
 
 
@@ -272,6 +281,7 @@
 		snakerun();
 		snake2run();
 		lets_run();
+		abssmall();
 
 	</script>
 </body>
