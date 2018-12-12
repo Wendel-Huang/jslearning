@@ -41,6 +41,82 @@
 		var headx=16;
 		var heady=19;
 
+		function addfood(){
+			field[Math.floor(Math.random()*numWidth)][Math.floor(Math.random()*numHeight)]=2;
+		}
+
+		function changearr(){
+			snake.unshift([headx,heady]);
+			if(field[headx][heady]==2){
+				addfood();
+			}else{
+				snake.length--;
+			}
+		}
+
+		function left(){
+			headx--;
+			if(headx==-1) headx=numWidth-1;
+			changearr();
+		}
+		function right(){
+			headx++;
+			if(headx==numWidth) headx=0;
+			changearr();
+		}
+		function up(){
+			heady--;
+			if(heady==-1) heady=numHeight-1;
+			changearr();
+		}
+		function down(){
+			heady++;
+			if(heady==numHeight) heady=0;
+			changearr();
+		}
+
+		function flushmap(){
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					if(field[i][j]==1) field[i][j]=0;
+				}
+			}
+			for(var i=0; i<snake.length; i++){
+				field[snake[i][0]][snake[i][1]]=1;
+			}
+		}
+
+		function paintmap(){
+			box.clearRect(0,0,width,height);
+			box.strokeRect(0,0,width,height);
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					if((field[i][j]==1)||(field[i][j]==2)){
+						box.fillRect(i*10+1,j*10+1,9,9)
+					}
+				}
+			}
+		}
+
+		function lets_run(){
+			if(direction==37) left();
+			if(direction==38) up();
+			if(direction==39) right();
+			if(direction==40) down();
+
+			flushmap();
+			paintmap();
+			setTimeout(lets_run,200);
+		}
+
+
+
+
+
+
+
+
+
 		
 
 
@@ -56,58 +132,14 @@
 				field[i]=new Array(numHeight);
 			}
 
+			addfood();
+			addfood();
+			addfood();
+
+
 			box = document.getElementById('can').getContext('2d');
 			box.fillStyle='red';
 		}();
-
-		function paintmap(){
-			box.clearRect(0,0,width,height);
-			box.strokeRect(0,0,width,height);
-			for(var i=0; i<numWidth; i++){
-				for(var j=0; j<numHeight; j++){
-					if(field[i][j]==1){
-						box.fillRect(i*10+1,j*10+1,9,9)
-					}
-				}
-			}
-		}
-
-		function left(){
-			headx--;
-			if(headx==-1) headx=numWidth-1;
-			snake.unshift([headx,heady]);
-			snake.length--;
-		}
-		function right(){
-			headx++;
-			if(headx==numWidth) headx=0;
-			snake.unshift([headx,heady]);
-			snake.length--;
-		}
-		function up(){
-			heady--;
-			if(heady==-1) heady=numHeight-1;
-			snake.unshift([headx,heady]);
-			snake.length--;
-		}
-		function down(){
-			heady++;
-			if(heady==numHeight) heady=0;
-			snake.unshift([headx,heady]);
-			snake.length--;
-		}
-
-		function flushmap(){
-			for(var i=0; i<numWidth; i++){
-				for(var j=0; j<numHeight; j++){
-					field[i][j]=0;
-				}
-			}
-			for(var i=0; i<snake.length; i++){
-				field[snake[i][0]][snake[i][1]]=1;
-			}
-		}
-
 		document.onkeydown=function(evt){
 			newdirection=(event||evt).keyCode;
 			if(Math.abs(newdirection-direction)!=2){
@@ -117,24 +149,13 @@
 		for(var i=1; i<5; i++){
 			!function(i){
 				document.getElementById(i).onclick=function(){
-					direction=36+i;
-					console.log(direction);
+					newdirection=36+i;
+					if(Math.abs(newdirection-direction)!=2){
+						direction=newdirection;
+					}
 				}
 			}(i);
 		}
-		
-
-		function lets_run(){
-			if(direction==37) left();
-			if(direction==38) up();
-			if(direction==39) right();
-			if(direction==40) down();
-
-			flushmap();
-			paintmap();
-			setTimeout(lets_run,500);
-		}
-
 		lets_run();
 
 	</script>
