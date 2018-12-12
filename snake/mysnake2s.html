@@ -27,8 +27,12 @@
 <body>
 	<div id="info">
 		<label>长度：</label><strong id="lengthId">6</strong>
-		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+		<label>&nbsp&nbsp&nbsp&nbsp</label>
 		<label>速度：</label><strong id="vId">1</strong>
+		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+		<label>长度2：</label><strong id="lengthId2">6</strong>
+		<label>&nbsp&nbsp&nbsp&nbsp</label>
+		<label>速度2：</label><strong id="vId2">1</strong>
 	</div>
 	<canvas id="can" width='380' height="380" style="background-color: white;">对不起，您的浏览器不支持canvas
 	</canvas>
@@ -47,14 +51,18 @@
 		var numHeight = height/10;
 		var initLength=6;
 		var snake; //存储蛇身坐标的数组
+		var snake2; //存储蛇身坐标的数组
 		var field; //存储地图上各坐标的蛇，食物情况
 		var direction=37;
+		var direction2=65;
 		var newdirection; //获取键盘值，判断不是回头时，赋值给direction
 		var box;
 		var v=1;
 
 		var headx=16;
 		var heady=19;
+		var headx2=16;
+		var heady2=9;
 
 		function addfood(){
 			field[Math.floor(Math.random()*numWidth)][Math.floor(Math.random()*numHeight)]=2;
@@ -70,6 +78,18 @@
 				addfood();
 			}else{
 				snake.length--;
+			}
+		}
+		function changearr2(){
+			if(field[headx2][heady2]==1){
+				alert('不要吃到自己哦！');
+				location.reload();
+			}
+			snake2.unshift([headx2,heady2]);
+			if(field[headx2][heady2]==2){
+				addfood();
+			}else{
+				snake2.length--;
 			}
 		}
 
@@ -94,6 +114,27 @@
 			changearr();
 		}
 
+		function left2(){
+			headx2--;
+			if(headx2==-1) headx2=numWidth-1;
+			changearr2();
+		}
+		function right2(){
+			headx2++;
+			if(headx2==numWidth) headx2=0;
+			changearr2();
+		}
+		function up2(){
+			heady2--;
+			if(heady2==-1) heady2=numHeight-1;
+			changearr2();
+		}
+		function down2(){
+			heady2++;
+			if(heady2==numHeight) heady2=0;
+			changearr2();
+		}
+
 		function flushmap(){
 			for(var i=0; i<numWidth; i++){
 				for(var j=0; j<numHeight; j++){
@@ -102,6 +143,9 @@
 			}
 			for(var i=0; i<snake.length; i++){
 				field[snake[i][0]][snake[i][1]]=1;
+			}
+			for(var i=0; i<snake2.length; i++){
+				field[snake2[i][0]][snake2[i][1]]=1;
 			}
 		}
 
@@ -121,6 +165,10 @@
 			snake=new Array(initLength);
 			for(var i=0; i<initLength; i++){
 				snake[i]=[i+headx,19];
+			}
+			snake2=new Array(initLength);
+			for(var i=0; i<initLength; i++){
+				snake2[i]=[i+headx2,9];
 			}
 
 			field=new Array(numWidth);
@@ -143,13 +191,21 @@
 			if(direction==39) right();
 			if(direction==40) down();
 
+			if(direction2==65) left2();
+			if(direction2==66) up2();
+			if(direction2==67) right2();
+			if(direction2==68) down2();
+
 			v=Math.floor(snake.length/6);
 			document.getElementById('lengthId').innerHTML=snake.length;
 			document.getElementById('vId').innerHTML=v;
+			v2=Math.floor(snake2.length/6);
+			document.getElementById('lengthId2').innerHTML=snake2.length;
+			document.getElementById('vId2').innerHTML=v2;
 
 			flushmap();
 			paintmap();
-			setTimeout(lets_run,400/v);
+			setTimeout(lets_run,500/v);
 		}
 
 
@@ -167,16 +223,26 @@
 		init();
 		document.onkeydown=function(evt){
 			newdirection=(event||evt).keyCode;
-			if(Math.abs(newdirection-direction)!=2){
+			if(newdirection==65) newdirection=65;
+			if(newdirection==87) newdirection=66;
+			if(newdirection==68) newdirection=67;
+			if(newdirection==83) newdirection=68;
+			if( (Math.abs(newdirection-direction)==1) || (Math.abs(newdirection-direction)==3) ){
 				direction=newdirection;
+			}
+			if( (Math.abs(newdirection-direction2)==1) || (Math.abs(newdirection-direction2)==3) ){
+				direction2=newdirection;
 			}
 		}
 		for(var i=1; i<5; i++){
 			!function(i){
 				document.getElementById(i).onclick=function(){
 					newdirection=36+i;
-					if(Math.abs(newdirection-direction)!=2){
-						direction=newdirection;
+					if( (Math.abs(newdirection-direction)==1) || (Math.abs(newdirection-direction)==3) ){
+						direction1=newdirection;
+					}
+					if( (Math.abs(newdirection-direction2)==1) || (Math.abs(newdirection-direction2)==3) ){
+						direction2=newdirection;
 					}
 				}
 			}(i);
