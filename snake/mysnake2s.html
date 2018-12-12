@@ -16,11 +16,22 @@
 			height: 25px;
 		}
 		button{
-			width:80px;
-			height: 60px;
+			width:45px;
+			height: 35px;
 		}
 		p{
 			margin: 8px;
+		}
+		#buttons{
+			overflow: hidden;
+			width: 378px;
+			margin: 1px auto;
+		}
+		.lr{
+			display: inline;
+			float: left;
+			width: 180px;
+			height: 120px;
 		}
 	</style>
 </head>
@@ -37,12 +48,22 @@
 	<canvas id="can" width='380' height="380" style="background-color: white;">对不起，您的浏览器不支持canvas
 	</canvas>
 	<div id="buttons">
-		<p><button id="2">up</button></p>
-		<p>
-			<button id="1">left</button>
-			<button id="4">down</button>
-			<button id="3">right</button>
-		</p>
+		<div class="lr">
+			<p><button id="2">up</button></p>
+			<p>
+				<button id="1">left</button>
+				<button id="4">down</button>
+				<button id="3">right</button>
+			</p>
+		</div>
+		<div class="lr">
+			<p><button id="6">up</button></p>
+			<p>
+				<button id="5">left</button>
+				<button id="8">down</button>
+				<button id="7">right</button>
+			</p>
+		</div>
 	</div>
 	<script type="text/javascript">
 		var width = document.getElementById('can').offsetWidth;
@@ -179,33 +200,36 @@
 			addfood();
 			addfood();
 			addfood();
-
-
 			box = document.getElementById('can').getContext('2d');
 			box.fillStyle='red';
 		}
 
-		function lets_run(){
+		function snakerun(){
 			if(direction==37) left();
 			if(direction==38) up();
 			if(direction==39) right();
 			if(direction==40) down();
+			v=Math.floor(snake.length/6);
+			document.getElementById('lengthId').innerHTML=snake.length;
+			document.getElementById('vId').innerHTML=v;
+			setTimeout(snakerun,400/v);
+		}
 
+		function snake2run(){
 			if(direction2==65) left2();
 			if(direction2==66) up2();
 			if(direction2==67) right2();
 			if(direction2==68) down2();
-
-			v=Math.floor(snake.length/6);
-			document.getElementById('lengthId').innerHTML=snake.length;
-			document.getElementById('vId').innerHTML=v;
 			v2=Math.floor(snake2.length/6);
 			document.getElementById('lengthId2').innerHTML=snake2.length;
 			document.getElementById('vId2').innerHTML=v2;
+			setTimeout(snake2run,400/v2);
+		}
 
+		function lets_run(){
 			flushmap();
 			paintmap();
-			setTimeout(lets_run,500/v);
+			setTimeout(lets_run,10);
 		}
 
 
@@ -213,10 +237,6 @@
 
 
 
-
-
-
-		
 
 
 
@@ -234,12 +254,14 @@
 				direction2=newdirection;
 			}
 		}
-		for(var i=1; i<5; i++){
+		for(var i=1; i<9; i++){
 			!function(i){
 				document.getElementById(i).onclick=function(){
-					newdirection=36+i;
+					if(i<5){
+						newdirection=36+i;
+					}else{newdirection=60+i;}
 					if( (Math.abs(newdirection-direction)==1) || (Math.abs(newdirection-direction)==3) ){
-						direction1=newdirection;
+						direction=newdirection;
 					}
 					if( (Math.abs(newdirection-direction2)==1) || (Math.abs(newdirection-direction2)==3) ){
 						direction2=newdirection;
@@ -247,6 +269,8 @@
 				}
 			}(i);
 		}
+		snakerun();
+		snake2run();
 		lets_run();
 
 	</script>
