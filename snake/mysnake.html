@@ -46,6 +46,7 @@
 		}
 
 		function changearr(){
+			if(field[headx][heady]==1) alert('不要吃到自己哦！')
 			snake.unshift([headx,heady]);
 			if(field[headx][heady]==2){
 				addfood();
