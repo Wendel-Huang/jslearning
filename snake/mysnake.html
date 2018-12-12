@@ -46,7 +46,10 @@
 		}
 
 		function changearr(){
-			if(field[headx][heady]==1) alert('不要吃到自己哦！')
+			if(field[headx][heady]==1){
+				alert('不要吃到自己哦！');
+				location.reload();
+			}
 			snake.unshift([headx,heady]);
 			if(field[headx][heady]==2){
 				addfood();
@@ -99,6 +102,26 @@
 			}
 		}
 
+		function init(){
+			snake=new Array(initLength);
+			for(var i=0; i<initLength; i++){
+				snake[i]=[i+headx,19];
+			}
+
+			field=new Array(numWidth);
+			for(var i=0; i<numWidth; i++){
+				field[i]=new Array(numHeight);
+			}
+
+			addfood();
+			addfood();
+			addfood();
+
+
+			box = document.getElementById('can').getContext('2d');
+			box.fillStyle='red';
+		}
+
 		function lets_run(){
 			if(direction==37) left();
 			if(direction==38) up();
@@ -122,25 +145,7 @@
 
 
 
-		!function(){
-			snake=new Array(initLength);
-			for(var i=0; i<initLength; i++){
-				snake[i]=[i+headx,19];
-			}
-
-			field=new Array(numWidth);
-			for(var i=0; i<numWidth; i++){
-				field[i]=new Array(numHeight);
-			}
-
-			addfood();
-			addfood();
-			addfood();
-
-
-			box = document.getElementById('can').getContext('2d');
-			box.fillStyle='red';
-		}();
+		init();
 		document.onkeydown=function(evt){
 			newdirection=(event||evt).keyCode;
 			if(Math.abs(newdirection-direction)!=2){
