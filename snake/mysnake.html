@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>贪吃蛇</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style type="text/css">
+		body{
+			text-align: center;
+			margin: 10px 0;
+		}
+		button{
+			width:60px;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="can" width='380' height="400" style="background-color: white;">对不起，您的浏览器不支持canvas
+	</canvas>
+	<div id="buttons">
+		<p><button id="2">up</button></p>
+		<p>
+			<button id="1">left</button>
+			<button id="4">down</button>
+			<button id="3">right</button>
+		</p>
+	</div>
+	<script type="text/javascript">
+		var width = document.getElementById('can').offsetWidth;
+		var height = document.getElementById('can').offsetHeight;
+		var numWidth = width/10;
+		var numHeight = height/10;
+		var initLength=6;
+		var snake; //存储蛇身坐标的数组
+		var field; //存储地图上各坐标的蛇，食物情况
+		var direction=37;
+		var box;
+
+		var headx=16;
+		var heady=19;
+
+		
+
+
+
+		!function(){
+			snake=new Array(initLength);
+			for(var i=0; i<initLength; i++){
+				snake[i]=[i+headx,19];
+			}
+
+			field=new Array(numWidth);
+			for(var i=0; i<numWidth; i++){
+				field[i]=new Array(numHeight);
+			}
+
+			box = document.getElementById('can').getContext('2d');
+			box.fillStyle='red';
+		}();
+
+		function paintmap(){
+			box.clearRect(0,0,width,height);
+			box.strokeRect(0,0,width,height);
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					if(field[i][j]==1){
+						box.fillRect(i*10+1,j*10+1,9,9)
+					}
+				}
+			}
+		}
+
+		function left(){
+			headx--;
+			if(headx==-1) headx=numWidth-1;
+			snake.unshift([headx,heady]);
+			snake.length--;
+		}
+		function right(){
+			headx++;
+			if(headx==numWidth) headx=0;
+			snake.unshift([headx,heady]);
+			snake.length--;
+		}
+		function up(){
+			heady--;
+			if(heady==-1) heady=numHeight-1;
+			snake.unshift([headx,heady]);
+			snake.length--;
+		}
+		function down(){
+			heady++;
+			if(heady==numHeight) heady=0;
+			snake.unshift([headx,heady]);
+			snake.length--;
+		}
+
+		function flushmap(){
+			for(var i=0; i<numWidth; i++){
+				for(var j=0; j<numHeight; j++){
+					field[i][j]=0;
+				}
+			}
+			for(var i=0; i<snake.length; i++){
+				field[snake[i][0]][snake[i][1]]=1;
+			}
+		}
+
+		document.onkeydown=function(evt){
+			direction=(event||evt).keyCode;
+		}
+		for(var i=1; i<5; i++){
+			!function(i){
+				document.getElementById(i).onclick=function(){
+					direction=36+i;
+					console.log(direction);
+				}
+			}(i);
+		}
+		
+
+		function lets_run(){
+			if(direction==37) left();
+			if(direction==38) up();
+			if(direction==39) right();
+			if(direction==40) down();
+
+			flushmap();
+			paintmap();
+			setTimeout(lets_run,500);
+		}
+
+		lets_run();
+
+	</script>
+</body>
+</html>

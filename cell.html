@@ -34,8 +34,6 @@
 
 		box = document.getElementById('can').getContext('2d');
 		box.fillStyle='red';
-		// box.lineWidth='1';
-		// box.strokeStyle="blue";
 		for(var i=0; i<numWidth; i++){
 			for(var j=0; j<numHeight; j++){
 				box.strokeRect(i*10,j*10,10,10);
@@ -55,8 +53,6 @@
 				}
 			}
 			box.fillStyle='red';
-			box.lineWidth='1';
-			box.strokeStyle="blue";
 			//newfield存储细胞下一次死活情况
 			var newfield = new Array();
 			for(var i=0; i<numWidth; i++){
