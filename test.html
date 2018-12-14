@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lll</title>
+	
+</head>
+<body>
+	<!-- <button>click</button>
+	<p>1</p>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.getElementsByTagName('button')[0].onclick=function(){
+			document.getElementsByTagName('p')[0].innerHTML	='2'
+			}
+			document.onkeydown=function(evst){
+				document.getElementsByTagName('p')[0].innerHTML=event.keyCode;
+			}
+		}
+	</script> -->
+
+
+
+	<!-- <canvas id="can" width="400" height="400" style="background-color: white;">对不起，您的浏览器不支持canvas
+	</canvas>
+	<script type="text/javascript">
+
+		var a;
+		var b;
+
+		a=new Array();
+		for(var i=0; i<10; i++){
+			a[i]=new Array();
+			for(j=0; j<10; j++){
+				a[i][j]=i+j;
+			}
+		}
+
+		b=new Array();
+		for(var i=0; i<10; i++){
+			b[i]=new Array();
+		}
+
+		b=a;
+
+		a[3][3]=3;
+
+	</script> -->
+
+
+
+	<p id="myp">10</p>
+	<script type="text/javascript">
+		 
+		 setInterval(function(){
+		 	var ax = event.accelerationIncludingGravity.x ; 
+		 	document.getElementById('myp').innerHTML=ax;
+		 },50)
+		 
+	</script>
+</body>
+</html>
