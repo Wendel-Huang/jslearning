@@ -25,6 +25,7 @@
 	</style>
 </head>
 <body>
+	<audio src="http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201811/10875.mp3" id="audio1" hidden="true" controls="controls" loop="false"></audio>
 	<div id="info">
 		<label>长度：</label><strong id="lengthId">6</strong>
 		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
@@ -46,12 +47,16 @@
 		var numWidth = width/10;
 		var numHeight = height/10;
 		var initLength=6;
+		var oldlength=6;
 		var snake; //存储蛇身坐标的数组
 		var field; //存储地图上各坐标的蛇，食物情况
 		var direction=37;
 		var newdirection; //获取键盘值，判断不是回头时，赋值给direction
 		var box;
 		var v=1;
+		var audio1ob=document.getElementById("audio1");
+
+		
 
 		var headx=16;
 		var heady=19;
@@ -132,7 +137,6 @@
 			addfood();
 			addfood();
 
-
 			box = document.getElementById('can').getContext('2d');
 			box.fillStyle='red';
 		}
@@ -146,6 +150,13 @@
 			v=Math.floor(snake.length/6);
 			document.getElementById('lengthId').innerHTML=snake.length;
 			document.getElementById('vId').innerHTML=v;
+
+			if(snake.length>oldlength){
+				var i=parseInt(10859)+parseInt(snake.length);
+				audio1ob.src='http://xmdx.sc.chinaz.com/Files/DownLoad/sound1/201811/'+i+'.mp3'
+				audio1ob.play();
+				oldlength=snake.length;
+			}
 
 			flushmap();
 			paintmap();

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lll</title>
+	
+</head>
+<body>
+	<!-- <button>click</button>
+	<p>1</p>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.getElementsByTagName('button')[0].onclick=function(){
+			document.getElementsByTagName('p')[0].innerHTML	='2'
+			}
+			document.onkeydown=function(evst){
+				document.getElementsByTagName('p')[0].innerHTML=event.keyCode;
+			}
+		}
+	</script> -->
+
+
+
+	<!-- <canvas id="can" width="400" height="400" style="background-color: white;">对不起，您的浏览器不支持canvas
+	</canvas>
+	<script type="text/javascript">
+
+		var a;
+		var b;
+
+		a=new Array();
+		for(var i=0; i<10; i++){
+			a[i]=new Array();
+			for(j=0; j<10; j++){
+				a[i][j]=i+j;
+			}
+		}
+
+		b=new Array();
+		for(var i=0; i<10; i++){
+			b[i]=new Array();
+		}
+
+		b=a;
+
+		a[3][3]=3;
+
+	</script> -->
+
+<!-- <audio src="./music1.mp3" id="audio" hidden="true"  controls="controls" ></audio>
+<script type="text/javascript">
+	var audio1ob=document.getElementById("audio1");
+		audio1ob.play();
+</script> -->
+
+
+
+<a href="javascript:void(0);" onclick="toggleAudio()"><div class="audioicon">2</div></a>
+			<audio id="myAudio" src="audio/BloodCastle.mp3"></audio>
+
+<script>
+		var x = document.getElementById("myAudio"); 
+		var play = true;
+		window.onload=function(){
+			x.play();
+		}
+		function toggleAudio(){
+			if(!play){
+				x.play();
+				play=true;
+			}else{
+				x.pause();
+				play=false;
+			}
+		}
+	</script>
+
+	
+</body>
+</html>

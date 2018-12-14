@@ -16,11 +16,11 @@
 			height: 25px;
 		}
 		button{
-			width: 60px;
-			height: 60px;
+			width:45px;
+			height: 45px;
 		}
 		p{
-			margin: 2px;
+			margin: 8px;
 		}
 		#buttons{
 			overflow: hidden;
@@ -121,43 +121,75 @@
 
 		function left(){
 			headx--;
-			if(headx==-1) headx=numWidth-1;
+			if(headx==-1){
+				headx=numWidth-1;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr();
 		}
 		function right(){
 			headx++;
-			if(headx==numWidth) headx=0;
+			if(headx==numWidth){
+				headx=0;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			} 
 			changearr();
 		}
 		function up(){
 			heady--;
-			if(heady==-1) heady=numHeight-1;
+			if(heady==-1) {
+				heady=numHeight-1;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr();
 		}
 		function down(){
 			heady++;
-			if(heady==numHeight) heady=0;
+			if(heady==numHeight) {
+				heady=0;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr();
 		}
 
 		function left2(){
 			headx2--;
-			if(headx2==-1) headx2=numWidth-1;
+			if(headx2==-1) {
+				headx2=numWidth-1;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr2();
 		}
 		function right2(){
 			headx2++;
-			if(headx2==numWidth) headx2=0;
+			if(headx2==numWidth) {
+				headx2=0;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr2();
 		}
 		function up2(){
 			heady2--;
-			if(heady2==-1) heady2=numHeight-1;
+			if(heady2==-1) {
+				heady2=numHeight-1;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr2();
 		}
 		function down2(){
 			heady2++;
-			if(heady2==numHeight) heady2=0;
+			if(heady2==numHeight) {
+				heady2=0;
+				alert('GG!  你撞墙了！')
+				location.reload();
+			}
 			changearr2();
 		}
 

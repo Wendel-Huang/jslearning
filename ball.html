@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>小球下落</title>
+	<meta charset="utf-8">
+	<canvas id="can" width="400" height="400" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
+</head>
+<body>
+	<script type="text/javascript">
+		var context=document.getElementById('can').getContext('2d');
+		var ball={x:300,y:50,vx:-0.8,vy:0,g:0.2,r:5,color:'blue'}
+		function update(){
+			ball.x=ball.x+ball.vx;
+			ball.y=ball.y+ball.vy;
+			ball.vy=ball.vy+ball.g;
+
+			if(ball.y>=context.canvas.width-ball.r){
+				ball.y=context.canvas.width-ball.r;
+				ball.vy=-0.8*ball.vy;
+			}
+		}
+		function render(cxt){
+			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
+
+			cxt.fillStyle=ball.color;
+			cxt.beginPath();
+			cxt.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
+			cxt.closePath();
+
+			cxt.fill();
+		}
+		window.onload=function(){
+			setInterval(function(){
+				update();
+				render(context);
+			},15)
+		}
+	</script>
+</body>
+</html>
