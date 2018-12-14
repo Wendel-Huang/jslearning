@@ -50,9 +50,12 @@
 
 	<p id="myp">10</p>
 	<script type="text/javascript">
-		 
+		 var ax;
 		 setInterval(function(){
-		 	var ax = event.accelerationIncludingGravity.x ; 
+		 	window.ondevicemotion = function(e) {
+       			accGravity = e.accelerationIncludingGravity;
+               	ax = event.accelerationIncludingGravity.x ; 
+			};
 		 	document.getElementById('myp').innerHTML=ax;
 		 },50)
 		 
