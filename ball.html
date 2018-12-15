@@ -3,23 +3,29 @@
 <head>
 	<title>小球下落</title>
 	<meta charset="utf-8">
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Expires" content="0" /> 
+</head>
+<body>
 	<canvas id="can" width="400" height="400" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
 	<div style="margin: 20px auto; width: 400px; height: 400px;">
 		<p id="x"></p>
 		<p id="y"></p>
 		<p id="z"></p>
 		<p id="g"></p>
+		<p id="gmax"></p>
 	</div>
-</head>
-<body>
 	<script type="text/javascript">
 		var context=document.getElementById('can').getContext('2d');
-		var ball={x:300,y:50,vx:0,vy:0,r:5,color:'blue'}
+		var ball={x:200,y:200,vx:0,vy:0,r:5,color:'blue'}
 		var px=document.getElementById('x');
 		var py=document.getElementById('y');
 		var pz=document.getElementById('z');
 		var pg=document.getElementById('g');
-
+		var pgmax=document.getElementById('gmax');
+		var gmax=0;
+		var ax=0,ay=0,az=0;
 
 		window.ondevicemotion = function(e) {
             ax = event.accelerationIncludingGravity.x ;
@@ -48,11 +54,18 @@
 				ball.x=ball.r;
 				ball.vx=-0.8*ball.vx;
 			}
-
+		}
+		function gtext(){
 			px.innerHTML='手机短边方向： '+ax;
 			py.innerHTML='手机长边方向： '+ay;
 			pz.innerHTML='垂直手机方向： '+az;
-			pg.innerHTML='总共的加速度： '+Math.sqrt(ax*ax+ay*ay+az*az);
+
+			g=Math.sqrt(ax*ax+ay*ay+az*az);
+			pg.innerHTML='总共的加速度： '+g;
+			if(g>gmax){
+				gmax=g;
+				pgmax.innerHTML='最大加速度： '+gmax;
+			}
 		}
 		function render(cxt){
 			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
@@ -69,6 +82,9 @@
 				update();
 				render(context);
 			},15)
+			setInterval(function(){
+				gtext();
+			},100)
 		}
 	</script>
 </body>
