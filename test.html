@@ -47,18 +47,40 @@
 	</script> -->
 
 
-
-	<p id="myp">1</p>
+<!-- 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<p id="mypx">1</p>
+	<p id="mypy">1</p>
+	<p id="mypz">1</p>
 	<script type="text/javascript">
-		 var ax;
-		 setInterval(function(){
-		 	window.ondevicemotion = function(e) {
-       			accGravity = e.accelerationIncludingGravity;
-               	ax = event.accelerationIncludingGravity.x ; 
-			};
-		 	document.getElementById('myp').innerHTML=ax;
-		 },50)
-		 
+		var ax;
+		var ay;
+		window.ondevicemotion = function(e) {
+            ax = event.accelerationIncludingGravity.x ;
+			ay = event.accelerationIncludingGravity.y ; 
+			az = event.accelerationIncludingGravity.z ; 
+		};
+		setInterval(function(){
+		 	document.getElementById('mypx').innerHTML=ax;
+		 	document.getElementById('mypy').innerHTML=ay;
+		 	document.getElementById('mypz').innerHTML=az;
+		},50) 
+	</script> -->
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<p id="demo"></p>
+
+	<script>
+	var w=window.innerWidth
+	|| document.documentElement.clientWidth
+	|| document.body.clientWidth;
+
+	var h=window.innerHeight
+	|| document.documentElement.clientHeight
+	|| document.body.clientHeight;
+
+	x=document.getElementById("demo");
+	x.innerHTML="浏览器的内部窗口宽度：" + w + "，高度：" + h + "。"
 	</script>
 </body>
 </html>

@@ -4,20 +4,51 @@
 	<title>小球下落</title>
 	<meta charset="utf-8">
 	<canvas id="can" width="400" height="400" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
+	<div style="margin: 20px auto; width: 400px; height: 400px;">
+		<p id="x"></p>
+		<p id="y"></p>
+		<p id="z"></p>
+	</div>
 </head>
 <body>
 	<script type="text/javascript">
 		var context=document.getElementById('can').getContext('2d');
-		var ball={x:300,y:50,vx:-0.8,vy:0,g:0.2,r:5,color:'blue'}
+		var ball={x:300,y:50,vx:0,vy:0,r:5,color:'blue'}
+		var px=document.getElementById('x');
+		var py=document.getElementById('y');
+		var pz=document.getElementById('z');
+
+		window.ondevicemotion = function(e) {
+            ax = event.accelerationIncludingGravity.x ;
+			ay = event.accelerationIncludingGravity.y ; 
+			az = event.accelerationIncludingGravity.z ; 
+		};
 		function update(){
 			ball.x=ball.x+ball.vx;
 			ball.y=ball.y+ball.vy;
-			ball.vy=ball.vy+ball.g;
+			ball.vy=ball.vy+ay*0.02;
+			ball.vx=ball.vx-ax*0.02;
 
-			if(ball.y>=context.canvas.width-ball.r){
-				ball.y=context.canvas.width-ball.r;
+			if(ball.y>=context.canvas.height-ball.r){
+				ball.y=context.canvas.height-ball.r;
 				ball.vy=-0.8*ball.vy;
 			}
+			if(ball.y<=ball.r){
+				ball.y=ball.r;
+				ball.vy=-0.8*ball.vy;
+			}
+			if(ball.x>=context.canvas.width-ball.r){
+				ball.x=context.canvas.width-ball.r;
+				ball.vx=-0.8*ball.vx;
+			}
+			if(ball.x<=ball.r){
+				ball.x=ball.r;
+				ball.vx=-0.8*ball.vx;
+			}
+
+			px.innerHTML='手机短边方向： '+ax;
+			py.innerHTML='手机长边方向： '+ay;
+			pz.innerHTML='垂直手机方向： '+az;
 		}
 		function render(cxt){
 			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
