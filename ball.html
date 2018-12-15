@@ -8,6 +8,7 @@
 		<p id="x"></p>
 		<p id="y"></p>
 		<p id="z"></p>
+		<p id="g"></p>
 	</div>
 </head>
 <body>
@@ -17,6 +18,8 @@
 		var px=document.getElementById('x');
 		var py=document.getElementById('y');
 		var pz=document.getElementById('z');
+		var pg=document.getElementById('g');
+
 
 		window.ondevicemotion = function(e) {
             ax = event.accelerationIncludingGravity.x ;
@@ -49,6 +52,7 @@
 			px.innerHTML='手机短边方向： '+ax;
 			py.innerHTML='手机长边方向： '+ay;
 			pz.innerHTML='垂直手机方向： '+az;
+			pg.innerHTML='总共的加速度： '+sqrt(ax*ax+ay*ay+az*az);
 		}
 		function render(cxt){
 			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
