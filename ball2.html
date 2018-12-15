@@ -8,7 +8,7 @@
 	<meta http-equiv="Expires" content="0" /> 
 </head>
 <body>
-	<canvas id="can" width="400" height="400" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
+	<canvas id="can" width="900" height="1200" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
 	<div style="margin: 20px auto; width: 400px; height: 400px;">
 		<p id="x"></p>
 		<p id="y"></p>
@@ -32,32 +32,70 @@
 			ay = event.accelerationIncludingGravity.y ; 
 			az = event.accelerationIncludingGravity.z ; 
 		};
-		function update(){
+		function move(){
 			ball.x=ball.x+ball.vx;
 			ball.y=ball.y+ball.vy;
 			ball.vy=ball.vy+ay*0.02;
 			ball.vx=ball.vx-ax*0.02;
-
-			if(ball.y>=context.canvas.height-ball.r){
-				ball.y=context.canvas.height-ball.r;
-				ball.vy=-0.8*ball.vy;
-			}
-			if(ball.y<=ball.r){
-				ball.y=ball.r;
-				ball.vy=-0.8*ball.vy;
-			}
-			if(ball.x>=context.canvas.width-ball.r){
-				ball.x=context.canvas.width-ball.r;
-				ball.vx=-0.8*ball.vx;
-			}
-			if(ball.x<=ball.r){
-				ball.x=ball.r;
-				if(ball.y>0.5*context.canvas.height){
-					ball.vx=-1.25*ball.vx;		
-				}else{
-					ball.vx=-0.8*ball.vx;		
+		}
+		function update(){
+			if((ball.y<context.canvas.height*0.4)||(ball.y>context.canvas.height*0.6)){
+				move();
+				if(ball.y>=context.canvas.height-ball.r){
+					ball.y=context.canvas.height-ball.r;
+					ball.vy=-0.8*ball.vy;
+				}
+				if(ball.y<=ball.r){
+					ball.y=ball.r;
+					ball.vy=-0.8*ball.vy;
+				}
+				if(ball.x>=context.canvas.width-ball.r){
+					ball.x=context.canvas.width-ball.r;
+					ball.vx=-0.8*ball.vx;
+				}
+				if(ball.x<=ball.r){
+					ball.x=ball.r;
+					ball.vx=-0.8*ball.vx;
 				}
 			}
+			else{
+				if(ball.x<=context.canvas.width*0.4-ball.r){
+					move();
+					if(ball.x<=ball.r){
+						ball.x=ball.r;
+						ball.vx=-0.8*ball.vx;
+					}
+					if(ball.x>=context.canvas.width*0.4-ball.r){
+						ball.x=context.canvas.width*0.4-ball.r;
+						ball.vx=-0.8*ball.vx;
+					}
+				}
+				else if(ball.x>=context.canvas.width*0.6+ball.r){
+					move();
+					if(ball.x>=context.canvas.width-ball.r){
+						ball.x=context.canvas.width-ball.r;
+						ball.vx=-0.8*ball.vx;
+					}
+					if(ball.x<=context.canvas.width*0.6+ball.r){
+						ball.x=context.canvas.width*0.6+ball.r;
+						ball.vx=-0.8*ball.vx;
+					}
+				}
+				else{
+					move();
+					if(ball.x<=context.canvas.width*0.4+ball.r){
+						ball.x=context.canvas.width*0.4+ball.r;
+						ball.vx=-1.25*ball.vx;
+					}
+					if(ball.x>=context.canvas.width*0.6-ball.r){
+						ball.x=context.canvas.width*0.6-ball.r;
+						ball.vx=-1.25*ball.vx;
+					}
+				}
+
+			}
+
+			
 		}
 		function gtext(){
 			px.innerHTML='手机短边方向： '+ax;
@@ -76,8 +114,10 @@
 
 			cxt.beginPath();
 			cxt.lineWidth=4;
-			cxt.moveTo(2,200);
-			cxt.lineTo(2,400);
+			cxt.moveTo(cxt.canvas.width*0.4,cxt.canvas.height*0.4);
+			cxt.lineTo(cxt.canvas.width*0.4,context.canvas.height*0.6);
+			cxt.moveTo(cxt.canvas.width*0.6,cxt.canvas.height*0.4);
+			cxt.lineTo(cxt.canvas.width*0.6,context.canvas.height*0.6);
 			cxt.closePath();
 			cxt.stroke();
 
