@@ -8,56 +8,32 @@
 	<canvas id="can" width="800" height="1200" style="border:1px solid #aaa; margin: 20px auto; display: block;" ></canvas>
 	<script type="text/javascript">
 		var context=document.getElementById('can').getContext('2d');
-		var ball={
-			initLength:8,
-			snakebody:new Array(8),
-			x:200,
-			y:200,
-			v:1,
-			vx:0,
-			vy:0,
-			r:10,
-			color:'blue'
-		};
+		var ball={x:200,y:200,v:1,vx:0,vy:0,r:5,color:'blue'};
 		var ax,ay,axy;
 
-// 		window.ondevicemotion = function(e) {
-//             ax = event.accelerationIncludingGravity.x ;
-// 			ay = event.accelerationIncludingGravity.y ; 
-// 			axy=Math.sqrt(ax*ax+ay*ay);
-// 			ball.vx=-ball.v*ax/axy;
-// 			ball.vy=ball.v*ay/axy;
-// 		};
-		function init(){
-			ax=1;
-			ay=1;
+		window.ondevicemotion = function(e) {
+            ax = event.accelerationIncludingGravity.x ;
+			ay = event.accelerationIncludingGravity.y ; 
 			axy=Math.sqrt(ax*ax+ay*ay);
-			for(var i=0;i<8;i++){
-				ball.snakebody[i]=[200+20*i,200];
-			}
-		}
-		function update(){
 			ball.vx=-ball.v*ax/axy;
 			ball.vy=ball.v*ay/axy;
+		};
+
+		function update(){
 			ball.x=ball.x+ball.vx;
 			ball.y=ball.y+ball.vy;
-			ball.snakebody.unshift([ball.x,ball.y]);
-			ball.snakebody.length--;
 		}
 		function render(cxt){
 			cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
 
 			cxt.fillStyle=ball.color;
 			cxt.beginPath();
-			for(var i=0;i<ball.initLength;i++){
-				cxt.arc(ball.snakebody[i][0],ball.snakebody[i][2],ball.r,0,2*Math.PI);
-			}
+			cxt.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
 			cxt.closePath();
 
 			cxt.fill();
 		}
 		window.onload=function(){
-			init();
 			setInterval(function(){
 				update();
 				render(context);
